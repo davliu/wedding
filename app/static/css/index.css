@@ -1,0 +1,16 @@
+.wedding-bod {
+  margin: 0 auto;
+  max-width: 780px;
+}
+
+h1, .center {
+  text-align: center;
+}
+
+table.navbar {
+  width: 780px;
+}
+
+table.navbar td {
+  min-width: 25%;
+}

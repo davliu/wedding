@@ -8,8 +8,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Janet and David Wedding</title>
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/index.css") }}" type="text/css">
   </head>
-  <body>
+  <body class="wedding-bod">
+    <h1>Janet and David Wedding DOT COM</h1>
+    {% include "navbar.html" %}
     {% block body %}
     {% endblock %}
   </body>
