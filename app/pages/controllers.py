@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request, flash, redirect, url_for
+from app.pages.forms import RSVPForm
 
 bp = Blueprint("pages", __name__)
 
@@ -15,3 +16,14 @@ def story():
 @bp.route("/event-info", methods=["GET"])
 def event():
     return render_template("pages/event-info.html")
+
+@bp.route("/rsvp", methods=["GET", "POST"])
+def rsvp():
+    if request.method == "POST":
+        form = RSVPForm()
+        if form.validate_on_submit():
+            flash("Thank you for registering!")
+            return redirect(url_for("pages.index"))
+    else:
+        form = RSVPForm()
+    return render_template("pages/rsvp.html", form=form)

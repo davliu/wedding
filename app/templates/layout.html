@@ -9,10 +9,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Janet and David Wedding</title>
     <link rel="stylesheet" href="{{ url_for("static", filename="css/index.css") }}" type="text/css">
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+      crossorigin="anonymous">
+    </script>
   </head>
   <body class="wedding-bod">
     <h1>Janet and David Wedding DOT COM</h1>
     {% include "navbar.html" %}
+    {% include "flash_messages.html" %}
     {% block body %}
     {% endblock %}
   </body>

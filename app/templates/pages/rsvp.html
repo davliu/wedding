@@ -1,0 +1,46 @@
+{% from "_form_helpers.html" import render_errors %}
+
+{% extends "layout.html" %}
+
+{% block body %}
+<h1>RSVP</h1>
+
+<form method="POST" action="{{ url_for("pages.rsvp") }}">
+  {{ form.hidden_tag() }}
+  <div>
+    {{ form.first_name.label }} {{ form.first_name(size=20) }}
+    {{ render_errors(form.first_name) }}
+  </div>
+  <div>
+    {{ form.last_name.label }} {{ form.last_name(size=20) }}
+    {{ render_errors(form.last_name) }}
+  </div>
+  <div>
+    {{ form.has_plus_one.label }} {{ form.has_plus_one(size=50) }}
+    {{ render_errors(form.has_plus_one) }}
+  </div>
+  <div class="plus-one">
+    {{ form.plus_one_first_name.label }} {{ form.plus_one_first_name(size=20) }}
+    {{ render_errors(form.plus_one_first_name) }}
+  </div>
+  <div class="plus-one">
+    {{ form.plus_one_last_name.label }} {{ form.plus_one_last_name(size=20) }}
+    {{ render_errors(form.plus_one_last_name) }}
+  </div>
+  <div>
+    {{ form.is_vegetarian.label }} {{ form.is_vegetarian() }}
+    {{ render_errors(form.is_vegetarian) }}
+  </div>
+  <div>
+    {{ form.passcode.label }} {{ form.passcode() }}
+    {{ render_errors(form.passcode) }}
+  </div>
+  <div>
+    {{ form.recaptcha }}
+    {{ render_errors(form.recaptcha) }}
+  </div>
+  <input type="submit" value="Go">
+</form>
+
+<script src="{{ url_for("static", filename="js/rsvp.js") }}"></script>
+{% endblock %}
