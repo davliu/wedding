@@ -38,7 +38,10 @@ class RSVP(object):
             return False
 
         re_compile = re.compile(
-            r"^({}).*({})$".format(form.first_name.data, form.last_name.data), re.IGNORECASE)
+            r"^({}).*({})$".format(
+                form.first_name.data.split(" ")[0],
+                form.last_name.data.split(" ")[-1]
+            ), re.IGNORECASE)
         try:
             matching_cell = wks.find(re_compile)
         except:
