@@ -16,8 +16,8 @@
     {{ render_errors(form.last_name) }}
   </div>
   <div>
-    {{ form.has_plus_one.label }} {{ form.has_plus_one(size=50) }}
-    {{ render_errors(form.has_plus_one) }}
+    {{ form.plus_one.label }} {{ form.plus_one(size=50) }}
+    {{ render_errors(form.plus_one) }}
   </div>
   <div class="plus-one">
     {{ form.plus_one_first_name.label }} {{ form.plus_one_first_name(size=20) }}
@@ -28,8 +28,8 @@
     {{ render_errors(form.plus_one_last_name) }}
   </div>
   <div>
-    {{ form.is_vegetarian.label }} {{ form.is_vegetarian() }}
-    {{ render_errors(form.is_vegetarian) }}
+    {{ form.vegetarian.label }} {{ form.vegetarian() }}
+    {{ render_errors(form.vegetarian) }}
   </div>
   <div>
     {{ form.passcode.label }} {{ form.passcode() }}
