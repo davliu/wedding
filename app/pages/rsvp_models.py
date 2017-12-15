@@ -10,8 +10,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 UPDATE_FIELDS = [
     "plus_one",
-    "plus_one_first_name",
-    "plus_one_last_name",
+    "plus_one_name",
     "vegetarian",
 ]
 

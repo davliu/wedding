@@ -20,12 +20,8 @@ class RSVPForm(FlaskForm):
         ]
     )
     plus_one = BooleanField("Plus One?")
-    plus_one_first_name = StringField(
-        "Plus First Name",
-        validators=[Regexp(r"^[A-z \d]*$", message="No record of this name")],
-    )
-    plus_one_last_name = StringField(
-        "Plus Last Name",
+    plus_one_name = StringField(
+        "Plus One Name (First and Last)",
         validators=[Regexp(r"^[A-z \d]*$", message="No record of this name")],
     )
     passcode = StringField(
@@ -36,11 +32,8 @@ class RSVPForm(FlaskForm):
     def validate(self):
         valid = FlaskForm.validate(self)
         if self.plus_one.data:
-            if not self.plus_one_first_name.data:
-                self.plus_one_first_name.errors.append("What is this person's first name?")
-                valid = False
-            if not self.plus_one_last_name.data:
-                self.plus_one_last_name.errors.append("What is this person's last name?")
+            if not self.plus_one_name.data:
+                self.plus_one_first_name.errors.append("What is this person's name?")
                 valid = False
 
         if not valid:

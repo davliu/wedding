@@ -20,12 +20,8 @@
     {{ render_errors(form.plus_one) }}
   </div>
   <div class="plus-one">
-    {{ form.plus_one_first_name.label }} {{ form.plus_one_first_name(size=20) }}
-    {{ render_errors(form.plus_one_first_name) }}
-  </div>
-  <div class="plus-one">
-    {{ form.plus_one_last_name.label }} {{ form.plus_one_last_name(size=20) }}
-    {{ render_errors(form.plus_one_last_name) }}
+    {{ form.plus_one_name.label }} {{ form.plus_one_name(size=50) }}
+    {{ render_errors(form.plus_one_name) }}
   </div>
   <div>
     {{ form.vegetarian.label }} {{ form.vegetarian() }}
