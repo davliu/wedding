@@ -1,0 +1,16 @@
+---
+- name: Add nginx ppa
+  become: true
+  apt_repository: repo='ppa:nginx/stable' state=present
+
+- name: Install common packages
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - nginx
+    - python-pip
+    - supervisor
+    - libpcre3
+    - libpcre3-dev
+
+- import_tasks: repo.yml
+- import_tasks: nginx.yml

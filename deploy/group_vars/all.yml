@@ -1,0 +1,3 @@
+---
+app_root: /home/deploy/wedding
+virtualenv_dir: /home/deploy/.virtualenvs/wedding

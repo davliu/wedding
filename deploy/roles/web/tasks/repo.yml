@@ -1,0 +1,23 @@
+---
+- name: Clone repo
+  git:
+    repo=git://github.com/davliu/wedding.git
+    dest={{ app_root }}
+    accept_hostkey=yes
+
+- name: Install virtualenv
+  pip: name=virtualenv state=present
+
+- name: Install requirements
+  pip:
+    virtualenv: "{{ virtualenv_dir }}"
+    requirements: "{{ app_root }}/requirements.txt"
+
+- name: Make sure {{ app_root }}/instance exists
+  file: path={{ app_root }}/instance state=directory
+
+- name: Copy instance files
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: "../instance/config.py", dest: "{{ app_root }}/instance/config.py" }
+    - { src: "../instance/service-credentials.json", dest: "{{ app_root }}/instance/service-credentials.json" }

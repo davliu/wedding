@@ -1,0 +1,21 @@
+---
+- hosts: web
+  user: root
+  become: yes
+  become_method: sudo
+  gather_facts: no
+  pre_tasks:
+    - name: Install python2
+      raw: sudo apt-get -y install python-simplejson
+
+    - name: Create a deploy user
+      user:
+        name: deploy
+        groups:
+          - sudo
+        state: present
+
+- hosts: web
+  user: root
+  roles:
+    - { role: web }

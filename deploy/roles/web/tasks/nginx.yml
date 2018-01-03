@@ -1,0 +1,31 @@
+---
+- name: Copy nginx site config
+  template: src={{ item.src }} dest={{ item.dest }} mode=0644
+  with_items:
+    - { src: nginx.conf, dest: /etc/nginx/sites-available/wedding }
+
+- name: Delete nginx defaults
+  file: path={{ item.path }} state=absent
+  with_items:
+    - {path: /etc/nginx/sites-available/default }
+    - {path: /etc/nginx/sites-enabled/default }
+
+- name: Provide supervisor uwsgi config
+  template: src=supervisor_uwsgi.conf dest=/etc/supervisor/conf.d/uwsgi.conf
+
+- name: Install uwsgi in virtualenv
+  pip:
+    name: uwsgi
+    virtualenv: "{{ virtualenv_dir }}"
+
+- name: Symlink to sites-available to sites-enabled
+  file:
+    src=/etc/nginx/sites-available/wedding
+    dest=/etc/nginx/sites-enabled/wedding
+    state=link
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+
+- name: restart uwsgi supervisor
+  supervisorctl: name=uwsgi state=restarted
