@@ -13,4 +13,5 @@
     - libpcre3-dev
 
 - import_tasks: repo.yml
+- import_tasks: encrypt.yml
 - import_tasks: nginx.yml

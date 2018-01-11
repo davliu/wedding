@@ -1,0 +1,15 @@
+- name: Add certbot ppa
+  become: true
+  apt_repository: repo='ppa:certbot/certbot' state=present
+
+- name: Install certbox
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - python-certbot-nginx
+
+# # Run this on the server the first time
+# - name: Obtain SSL Cert
+#   become: true
+#   # shell: certbot --nginx -d www.{{ domain_name }} # Did not use because of TLS-SNI-01 security report
+#   # Check `ps aux | grep nginx` for command anamolies between how certbox and you restart. Kill if required.
+#   shell: certbot --authenticator standalone --installer nginx -d www.{{ domain_name }} --pre-hook "service nginx stop" --post-hook "service nginx start"
