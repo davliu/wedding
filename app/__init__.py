@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask
+from flask import Flask, url_for, request
 from flask_wtf.csrf import CSRFProtect
 
 from config import configs
@@ -13,6 +13,19 @@ def create_app():
     app.config.from_object(configs["default"])
     app.config.from_pyfile("config.py", silent=True)
     csrf.init_app(app)
+
+    @app.context_processor
+    def inject_nav():
+        nav_items = [
+            dict(title="Home", route=url_for("pages.index")),
+            dict(title="Our Story", route=url_for("pages.story")),
+            dict(title="Event Info", route=url_for("pages.event")),
+            dict(title="RSVP", route=url_for("pages.rsvp")),
+        ]
+        for nav_item in nav_items:
+            nav_item["disabled"] = request.path == nav_item["route"]
+        return dict(nav_items=nav_items)
+
     return app
 
 def register_blueprints(app):

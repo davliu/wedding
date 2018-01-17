@@ -3,40 +3,66 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>RSVP</h1>
+<h1 class="text-center">RSVP</h1>
+
+{% if form.errors %}
+  {% for errors in form.errors.values() %}
+    {% for error in errors %}
+      <div class="alert alert-danger" role="alert">{{ error }}</div>
+    {% endfor %}
+  {% endfor %}
+{% endif %}
 
 <form method="POST" action="{{ url_for("pages.rsvp") }}">
   {{ form.hidden_tag() }}
-  <div>
-    {{ form.first_name.label }} {{ form.first_name(size=20) }}
-    {{ render_errors(form.first_name) }}
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      {{ form.first_name.label }}
+      {{ form.first_name(size=20, class_="form-control", placeholder="First Name") }}
+    </div>
+    <div class="form-group col-md-5">
+      {{ form.last_name.label }}
+      {{ form.last_name(size=20, class_="form-control", placeholder="Last Name") }}
+    </div>
+    <div class="form-group col-md-2">
+      <div class="form-check">
+        <br>
+        {{ form.vegetarian(class_="form-check-input") }}
+        {{ form.vegetarian.label(class_="form-check-label") }}
+      </div>
+    </div>
   </div>
-  <div>
-    {{ form.last_name.label }} {{ form.last_name(size=20) }}
-    {{ render_errors(form.last_name) }}
+  <div class="form-row">
+    <div class="form-group col-md-2">
+      <div class="form-check">
+        {{ form.plus_one(class_="form-check-input") }}
+        {{ form.plus_one.label(class_="form-check-label") }}
+      </div>
+    </div>
+    <div class="form-group col-md-8 plus-one">
+      {{ form.plus_one_name.label }}
+      {{ form.plus_one_name(class_="form-control") }}
+    </div>
   </div>
-  <div>
-    {{ form.plus_one.label }} {{ form.plus_one(size=50) }}
-    {{ render_errors(form.plus_one) }}
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      {{ form.passcode.label }}
+      {{ form.passcode(class_="form-control") }}
+    </div>
   </div>
-  <div class="plus-one">
-    {{ form.plus_one_name.label }} {{ form.plus_one_name(size=50) }}
-    {{ render_errors(form.plus_one_name) }}
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      {{ form.recaptcha }}
+    </div>
   </div>
-  <div>
-    {{ form.vegetarian.label }} {{ form.vegetarian() }}
-    {{ render_errors(form.vegetarian) }}
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">RSVP</button>
+    </div>
   </div>
-  <div>
-    {{ form.passcode.label }} {{ form.passcode() }}
-    {{ render_errors(form.passcode) }}
-  </div>
-  <div>
-    {{ form.recaptcha }}
-    {{ render_errors(form.recaptcha) }}
-  </div>
-  <input type="submit" value="Go">
 </form>
+{% endblock %}
 
+{% block scripts %}
 <script src="{{ url_for("static", filename="js/rsvp.js") }}"></script>
 {% endblock %}

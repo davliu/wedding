@@ -1,10 +1,17 @@
-<table class="center navbar">
-  <tbody>
-    <tr>
-      <td><a href="{{ url_for("pages.index") }}">Home</a></td>
-      <td><a href="{{ url_for("pages.story") }}">Our Story</a></td>
-      <td><a href="{{ url_for("pages.event") }}">Event Info</a></td>
-      <td><a href="{{ url_for("pages.rsvp") }}">RSVP</a></td>
-    </tr>
-  </tbody>
-</table>
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto">
+      {% for nav_item in nav_items %}
+        <li class="nav-item{% if not nav_item.disabled %} active{% endif %}">
+          <a
+            class="nav-link{% if nav_item.disabled %} disabled{% endif %}"
+            href="{{ nav_item.route }}">{{ nav_item.title }}{% if nav_item.disabled %} <span class="sr-only">(current)</span>{% endif %}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</nav>

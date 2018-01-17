@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<h1>Event Info</h1>
+<h1 class="text-center">Event Info</h1>
 
 <div><b>Where: </b><a href="http://doubletree3.hilton.com/en/hotels/california/doubletree-by-hilton-hotel-los-angeles-downtown-LAXDTDT/index.html" target="_blank">DoubleTree in Downtown Los Angeles</a></div>
 <div><b>Address: </b>120 S Los Angeles St, Los Angeles, CA 90012</div>
 <div><b>Date: </b>July 28, 2018</div>
 <div><b>Time: </b>Ceremony starts at 5:00 PM PST, so try to arrive 30 minutes early. Reception starts at 7:00 PM PST.</div>
-<div class="center">
-  <img src="https://maps.googleapis.com/maps/api/staticmap?size=500x500&key={{ config["GOOGLE_BROWSER_KEY"] }}&markers=color:blue|120%20S%20Los%20Angeles%20St,%20Los%20Angeles,%20CA%2090012&zoom=10">
+<div class="text-center">
+  <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=500x500&key={{ config["GOOGLE_BROWSER_KEY"] }}&markers=color:blue|120%20S%20Los%20Angeles%20St,%20Los%20Angeles,%20CA%2090012&zoom=10">
 </div>
 {% endblock %}

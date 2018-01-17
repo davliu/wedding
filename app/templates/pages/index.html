@@ -2,19 +2,12 @@
 
 {% block body %}
 <div>
-  <p>
-    Greetings Potential Guests,
-    <br><br>
-    Thank you for visiting the official site of Janet and David's wedding!
-    <br><br>
-    Please RSVP by March 1, 2018!
-    <br><br>
-    Sincerely,
-    <br>
-    Janet and David
-  </p>
-  <div class="center">
-    <img src="{{ url_for("static", filename="images/mj-monkey.png") }}">
+  <h1 class="text-center">Janet and David's Wedding</h1>
+  <h2 class="text-center">July 28, 2018</h2>
+  <div class="text-center">
+    <img
+      class="img-fluid"
+      src="{{ url_for("static", filename="images/mj-monkey.png") }}">
   </div>
 </div>
 {% endblock %}
