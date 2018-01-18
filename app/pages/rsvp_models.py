@@ -44,6 +44,7 @@ class RSVP(object):
         try:
             matching_cell = wks.find(re_compile)
         except:
+            form.first_name.errors.append("Could not find name.")
             return False
 
         headers = RSVP.get_headers(wks)
@@ -53,6 +54,7 @@ class RSVP(object):
             (wks.cell(matching_cell.row, headers["passcode"]).value or "").lower().strip() !=
             (form.passcode.data or "").lower().strip()
         ):
+            form.passcode.errors.append("Double check your passcode and try again.")
             return False
 
         # Update cells

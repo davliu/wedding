@@ -23,12 +23,9 @@ def event():
 def rsvp():
     if request.method == "POST":
         form = RSVPForm()
-        if form.validate_on_submit():
-            if RSVP.reserve(form):
-                flash("Thank you for registering!")
-                return redirect(url_for("pages.index"))
-            else:
-                flash("Please double check your info and try again!")
+        if form.validate_on_submit() and RSVP.reserve(form):
+            flash("Thank you for registering!")
+            return redirect(url_for("pages.index"))
     else:
         form = RSVPForm()
     return render_template("pages/rsvp.html", form=form)
