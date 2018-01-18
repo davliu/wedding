@@ -47,11 +47,18 @@
         {{ form.plus_one.label(class_="form-check-label") }}
       </div>
     </div>
-    <div class="form-group col-md-8 plus-one">
+    <div class="form-group col-md-8 plus-one-field">
       {{ form.plus_one_name.label }}
       {{ form.plus_one_name(class_="form-control is-invalid" if form.errors.plus_one_name else "form-control") }}
       <div class="invalid-feedback">
         {% for e in form.errors.plus_one_name %}{{ e }}{% endfor %}
+      </div>
+    </div>
+    <div class="form-group col-md-2 plus-one-field">
+      <div class="form-check">
+        <br>
+        {{ form.plus_one_vegetarian(class_="form-check-input") }}
+        {{ form.plus_one_vegetarian.label(class_="form-check-label") }}
       </div>
     </div>
   </div>

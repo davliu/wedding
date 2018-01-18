@@ -1,9 +1,9 @@
 $(function() {
   var showPlusOne = function() {
     if ($("#plus_one").is(":checked")) {
-      $(".plus-one").show();
+      $(".plus-one-field").show();
     } else {
-      $(".plus-one").hide();
+      $(".plus-one-field").hide();
     }
   };
 

@@ -34,6 +34,7 @@ class RSVPForm(FlaskForm):
     )
     vegetarian = BooleanField("Vegetarian?")
     recaptcha = RecaptchaField(validators=[Recaptcha(message="Solve the recaptcha correctly!")])
+    plus_one_vegetarian = BooleanField("Vegetarian?")
 
     def validate(self):
         valid = FlaskForm.validate(self)

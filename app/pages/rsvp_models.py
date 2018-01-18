@@ -9,9 +9,10 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 UPDATE_FIELDS = [
+    "vegetarian",
     "plus_one",
     "plus_one_name",
-    "vegetarian",
+    "plus_one_vegetarian",
 ]
 
 class RSVP(object):
