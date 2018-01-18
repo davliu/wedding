@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from flask_wtf import FlaskForm, RecaptchaField, Recaptcha
-from wtforms import StringField, BooleanField
-from wtforms.validators import DataRequired, Regexp
+from wtforms import StringField, BooleanField, TextAreaField
+from wtforms.validators import DataRequired, Regexp, length
 
 class RSVPForm(FlaskForm):
     first_name = StringField(
         "First Name",
         validators=[
             DataRequired(message="Your first name is required"),
-            Regexp(r"^[A-z \d]*$", message="No record of this name"),
+            Regexp(r"^[A-z \d\']*$", message="No special characters allowed"),
+            length(max=100),
         ],
         render_kw={"placeholder": "First Name"},
     )
@@ -17,24 +18,36 @@ class RSVPForm(FlaskForm):
         "Last Name",
         validators=[
             DataRequired(message="Your last name is required"),
-            Regexp(r"^[A-z \d]*$", message="No record of this name"),
+            Regexp(r"^[A-z \d\']*$", message="No special characters allowed"),
+            length(max=100),
         ],
         render_kw={"placeholder": "Last Name"},
     )
     plus_one = BooleanField("Plus One?")
     plus_one_name = StringField(
         "Plus One Name (First and Last)",
-        validators=[Regexp(r"^[A-z \d]*$", message="No record of this name")],
+        validators=[
+            Regexp(r"^[A-z \d\']*$", message="No special characters allowed"),
+            length(max=200),
+        ],
         render_kw={"placeholder": "Plus One Name"},
     )
     passcode = StringField(
         "Passcode",
-        validators=[DataRequired(message="Enter the passcode included in your invite")],
+        validators=[
+            DataRequired(message="Enter the passcode included in your invite"),
+            Regexp(r"^[A-z0-9]+$", message="No special characters allowed"),
+            length(max=4),
+        ],
         render_kw={"placeholder": "Invitation Code"},
     )
     vegetarian = BooleanField("Vegetarian?")
     recaptcha = RecaptchaField(validators=[Recaptcha(message="Solve the recaptcha correctly!")])
     plus_one_vegetarian = BooleanField("Vegetarian?")
+    additional_comments = TextAreaField(
+        "Additional Comments",
+        validators=[length(max=200)],
+    )
 
     def validate(self):
         valid = FlaskForm.validate(self)

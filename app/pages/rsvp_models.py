@@ -13,6 +13,7 @@ UPDATE_FIELDS = [
     "plus_one",
     "plus_one_name",
     "plus_one_vegetarian",
+    "additional_comments",
 ]
 
 class RSVP(object):

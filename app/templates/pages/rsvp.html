@@ -63,12 +63,18 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-5">
       {{ form.passcode.label }}
       {{ form.passcode(class_="form-control is-invalid" if form.errors.passcode else "form-control") }}
       <div class="invalid-feedback">
         {% for e in form.errors.passcode %}{{ e }}{% endfor %}
       </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      {{ form.additional_comments.label }}
+      {{ form.additional_comments(class_="form-control is-invalid" if form.errors.additional_comments else "form-control") }}
     </div>
   </div>
   <div class="form-row">
