@@ -5,6 +5,7 @@ class Config(object):
     SECRET_KEY = "SUPER_SECRET"
     SPREADSHEET_NAME = "MY_SPREADSHEET_NAME"
     SHEET_TAB_NAME = "MY_TAB_NAME"
+    TEMPLATES_AUTO_RELOAD = True
 
 
 configs = {

@@ -18,73 +18,22 @@
 <form method="POST" action="{{ url_for("pages.rsvp") }}">
   {{ form.hidden_tag() }}
   <div class="form-row">
-    <div class="form-group col-md-5">
-      {{ form.first_name.label }}
-      {{ form.first_name(class_="form-control is-invalid" if form.errors.first_name else "form-control") }}
+    <div class="form-group col-md-6 offset-md-3">
+      {{ form.invitation_code.label }}
+      {{ form.invitation_code(class_="form-control is-invalid" if form.errors.invitation_code else "form-control") }}
       <div class="invalid-feedback">
-        {% for e in form.errors.first_name %}{{ e }}{% endfor %}
-      </div>
-    </div>
-    <div class="form-group col-md-5">
-      {{ form.last_name.label }}
-      {{ form.last_name(class_="form-control is-invalid" if form.errors.last_name else "form-control") }}
-      <div class="invalid-feedback">
-        {% for e in form.errors.last_name %}{{ e }}{% endfor %}
-      </div>
-    </div>
-    <div class="form-group col-md-2">
-      <div class="form-check">
-        <br>
-        {{ form.vegetarian(class_="form-check-input") }}
-        {{ form.vegetarian.label(class_="form-check-label") }}
+        {% for e in form.errors.invitation_code %}{{ e }}{% endfor %}
       </div>
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-md-2">
-      <div class="form-check">
-        {{ form.plus_one(class_="form-check-input") }}
-        {{ form.plus_one.label(class_="form-check-label") }}
-      </div>
-    </div>
-    <div class="form-group col-md-8 plus-one-field">
-      {{ form.plus_one_name.label }}
-      {{ form.plus_one_name(class_="form-control is-invalid" if form.errors.plus_one_name else "form-control") }}
-      <div class="invalid-feedback">
-        {% for e in form.errors.plus_one_name %}{{ e }}{% endfor %}
-      </div>
-    </div>
-    <div class="form-group col-md-2 plus-one-field">
-      <div class="form-check">
-        <br>
-        {{ form.plus_one_vegetarian(class_="form-check-input") }}
-        {{ form.plus_one_vegetarian.label(class_="form-check-label") }}
-      </div>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-5">
-      {{ form.passcode.label }}
-      {{ form.passcode(class_="form-control is-invalid" if form.errors.passcode else "form-control") }}
-      <div class="invalid-feedback">
-        {% for e in form.errors.passcode %}{{ e }}{% endfor %}
-      </div>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-5">
-      {{ form.additional_comments.label }}
-      {{ form.additional_comments(class_="form-control is-invalid" if form.errors.additional_comments else "form-control") }}
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-12">
+    <div class="form-group col-md-6 offset-md-3">
       {{ form.recaptcha }}
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">RSVP</button>
+    <div class="col-md-12 text-center">
+      <button type="submit" class="btn btn-primary">Retrieve Reservation</button>
     </div>
   </div>
 </form>

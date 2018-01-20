@@ -5,24 +5,28 @@ from wtforms import StringField, BooleanField, TextAreaField
 from wtforms.validators import DataRequired, Regexp, length
 
 class RSVPForm(FlaskForm):
-    first_name = StringField(
-        "First Name",
+    invitation_code = StringField(
+        "Invitation Code (found in your invite)",
         validators=[
-            DataRequired(message="Your first name is required"),
-            Regexp(r"^[A-z \d\']*$", message="No special characters allowed"),
-            length(max=100),
+            DataRequired(message="Enter the invitation code included in your invite"),
+            Regexp(r"^[A-z0-9]+$", message="No special characters allowed"),
+            length(max=4),
         ],
-        render_kw={"placeholder": "First Name"},
+        render_kw={"placeholder": "Invitation Code"},
     )
-    last_name = StringField(
-        "Last Name",
+    recaptcha = RecaptchaField(validators=[Recaptcha(message="Solve the recaptcha correctly!")])
+
+class RSVPUpdateForm(FlaskForm):
+    invitation_code = StringField(
+        "Invitation Code (found in your invite)",
         validators=[
-            DataRequired(message="Your last name is required"),
-            Regexp(r"^[A-z \d\']*$", message="No special characters allowed"),
-            length(max=100),
+            DataRequired(message="Enter the invitation code included in your invite"),
+            Regexp(r"^[A-z0-9]+$", message="No special characters allowed"),
+            length(max=4),
         ],
-        render_kw={"placeholder": "Last Name"},
+        render_kw={"placeholder": "Invitation Code"},
     )
+
     plus_one = BooleanField("Plus One?")
     plus_one_name = StringField(
         "Plus One Name (First and Last)",
@@ -32,17 +36,7 @@ class RSVPForm(FlaskForm):
         ],
         render_kw={"placeholder": "Plus One Name"},
     )
-    passcode = StringField(
-        "Passcode",
-        validators=[
-            DataRequired(message="Enter the passcode included in your invite"),
-            Regexp(r"^[A-z0-9]+$", message="No special characters allowed"),
-            length(max=4),
-        ],
-        render_kw={"placeholder": "Invitation Code"},
-    )
     vegetarian = BooleanField("Vegetarian?")
-    recaptcha = RecaptchaField(validators=[Recaptcha(message="Solve the recaptcha correctly!")])
     plus_one_vegetarian = BooleanField("Vegetarian?")
     additional_comments = TextAreaField(
         "Additional Comments",

@@ -2,27 +2,34 @@
 from datetime import datetime
 import json
 import pytz
-import re
 
 from flask import current_app
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-UPDATE_FIELDS = [
+RETRIEVE_FIELDS = {
+    "person",
+    "invitation_code",
+    "plus_one",
+    "email",
     "vegetarian",
     "plus_one",
     "plus_one_name",
     "plus_one_vegetarian",
     "additional_comments",
-]
+}
+
+UPDATE_FIELDS = {
+    "vegetarian",
+    "plus_one",
+    "plus_one_name",
+    "plus_one_vegetarian",
+    "additional_comments",
+}
 
 class RSVP(object):
     @staticmethod
-    def get_headers(wks):
-        return {v.replace(" ", "_").lower(): k + 1 for k, v in enumerate(wks.row_values(1)) if v}
-
-    @staticmethod
-    def reserve(form):
+    def get_wks():
         scope = ['https://spreadsheets.google.com/feeds']
 
         with current_app.open_instance_resource('service-credentials.json') as f:
@@ -30,34 +37,42 @@ class RSVP(object):
 
         gc = gspread.authorize(credentials)
         try:
-            wks = (
+            return (
                 gc.
                 open(current_app.config["SPREADSHEET_NAME"]).
                 worksheet(current_app.config["SHEET_TAB_NAME"])
             )
         except:
-            return False
+            return
 
-        re_compile = re.compile(
-            r"^({}).*({})$".format(
-                form.first_name.data.split(" ")[0],
-                form.last_name.data.split(" ")[-1]
-            ), re.IGNORECASE)
+    @staticmethod
+    def get_headers(wks):
+        return {v.replace(" ", "_").lower(): k for k, v in enumerate(wks.row_values(1)) if v}
+
+    @staticmethod
+    def validate_invitation_code(form):
+        wks = RSVP.get_wks()
         try:
-            matching_cell = wks.find(re_compile)
+            matching_cell = wks.find(form.invitation_code.data.upper())
         except:
-            form.first_name.errors.append("Could not find name.")
-            return False
+            matching_cell = None
+        if not matching_cell:
+            form.invitation_code.errors.append("Double check your invitation code and try again.")
+            return
 
         headers = RSVP.get_headers(wks)
+        row_values = wks.row_values(matching_cell.row)
+        invite = {
+            h: row_values[i]
+            for h, i in headers.iteritems() if h in RETRIEVE_FIELDS
+        }
+        invite["row"] = matching_cell.row
+        return invite
 
-        # Check if passcode match
-        if (
-            (wks.cell(matching_cell.row, headers["passcode"]).value or "").lower().strip() !=
-            (form.passcode.data or "").lower().strip()
-        ):
-            form.passcode.errors.append("Double check your passcode and try again.")
-            return False
+    @staticmethod
+    def reserve(form, invite):
+        wks = RSVP.get_wks()
+        headers = RSVP.get_headers(wks)
 
         # Update cells
         for field, value in form.data.items():
@@ -66,10 +81,10 @@ class RSVP(object):
             save_value = value
             if type(value) == bool:
                 save_value = 1 if value else 0
-            wks.update_cell(matching_cell.row, headers[field], save_value)
+            wks.update_cell(invite["row"], headers[field] + 1, save_value)
 
         time_now = pytz.utc.localize(
             datetime.utcnow()).astimezone(pytz.timezone("America/Los_Angeles"))
         wks.update_cell(
-            matching_cell.row, headers["rsvp_time"], time_now.strftime("%Y-%m-%dT%H:%M:%S PST"))
+            invite["row"], headers["rsvp_time"] + 1, time_now.strftime("%Y-%m-%dT%H:%M:%S PST"))
         return True
