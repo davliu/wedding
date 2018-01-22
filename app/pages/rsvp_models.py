@@ -9,6 +9,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from wtforms import BooleanField
 
 RETRIEVE_FIELDS = {
+    "attending",
     "person",
     "invitation_code",
     "plus_one",
@@ -21,6 +22,7 @@ RETRIEVE_FIELDS = {
 }
 
 UPDATE_FIELDS = {
+    "attending",
     "vegetarian",
     "plus_one",
     "plus_one_name",

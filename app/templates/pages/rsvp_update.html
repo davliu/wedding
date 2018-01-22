@@ -10,6 +10,12 @@
   {{ form.hidden_tag() }}
   {{ form.invitation_code }}
   <div class="form-group form-row">
+    {{ form.attending.label(class_="form-check-label col-md-3 offset-md-3 col-6") }}
+    <div class="col-md-3 col-6">
+      {{ form.attending() }}
+    </div>
+  </div>
+  <div class="form-group form-row">
     {{ form.vegetarian.label(class_="form-check-label col-md-3 offset-md-3 col-6") }}
     <div class="col-md-3 col-6">
       <div class="form-check">

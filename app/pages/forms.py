@@ -18,6 +18,7 @@ class RSVPForm(FlaskForm):
 
 class RSVPUpdateForm(FlaskForm):
     invitation_code = HiddenField("Invitation Code (found in your invite)")
+    attending = BooleanField("Will you be attending?")
     plus_one = BooleanField("Are you bringing a plus one?")
     plus_one_name = StringField(
         "Plus One Name (First and Last)",
