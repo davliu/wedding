@@ -8,40 +8,42 @@
 
 <form method="POST" action="{{ url_for("pages.rsvp_update") }}">
   {{ form.hidden_tag() }}
-  <div class="form-row">
-    <div class="form-group col-md-2">
+  <div class="form-group form-row">
+    {{ form.vegetarian.label(class_="form-check-label col-md-3 offset-md-3") }}
+    <div class="col-md-3">
       <div class="form-check">
-        <br>
         {{ form.vegetarian(class_="form-check-input") }}
-        {{ form.vegetarian.label(class_="form-check-label") }}
       </div>
     </div>
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-2">
+  <div class="form-group form-row">
+    {{ form.plus_one.label(class_="form-check-label col-md-3 offset-md-3") }}
+    <div class="col-md-3">
       <div class="form-check">
         {{ form.plus_one(class_="form-check-input") }}
-        {{ form.plus_one.label(class_="form-check-label") }}
       </div>
     </div>
-    <div class="form-group col-md-8 plus-one-field">
-      {{ form.plus_one_name.label }}
+  </div>
+  <div class="form-group form-row plus-one-field">
+    {{ form.plus_one_name.label(class_="col-form-label col-md-3 offset-md-3") }}
+    <div class="col-md-3">
       {{ form.plus_one_name(class_="form-control is-invalid" if form.errors.plus_one_name else "form-control") }}
       <div class="invalid-feedback">
         {% for e in form.errors.plus_one_name %}{{ e }}{% endfor %}
       </div>
     </div>
-    <div class="form-group col-md-2 plus-one-field">
+  </div>
+  <div class="form-group form-row plus-one-field">
+    {{ form.plus_one_vegetarian.label(class_="form-check-label col-md-3 offset-md-3") }}
+    <div class="col-md-3">
       <div class="form-check">
-        <br>
         {{ form.plus_one_vegetarian(class_="form-check-input") }}
-        {{ form.plus_one_vegetarian.label(class_="form-check-label") }}
       </div>
     </div>
   </div>
-  <div class="form-row">
-    <div class="form-group col-md-5">
-      {{ form.additional_comments.label }}
+  <div class="form-group form-row">
+    {{ form.additional_comments.label(class_="form-check-label col-md-3 offset-md-3") }}
+    <div class="col-md-3">
       {{ form.additional_comments(class_="form-control is-invalid" if form.errors.additional_comments else "form-control") }}
       <div class="invalid-feedback">
         {% for e in form.errors.additional_comments %}{{ e }}{% endfor %}
@@ -54,7 +56,7 @@
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-sm-10">
+    <div class="col-md-3 offset-md-3">
       <button type="submit" class="btn btn-primary">RSVP</button>
     </div>
   </div>

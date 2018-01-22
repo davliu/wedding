@@ -27,7 +27,7 @@ class RSVPUpdateForm(FlaskForm):
         render_kw={"placeholder": "Invitation Code"},
     )
 
-    plus_one = BooleanField("Plus One?")
+    plus_one = BooleanField("Are you bringing a plus one?")
     plus_one_name = StringField(
         "Plus One Name (First and Last)",
         validators=[
@@ -36,8 +36,8 @@ class RSVPUpdateForm(FlaskForm):
         ],
         render_kw={"placeholder": "Plus One Name"},
     )
-    vegetarian = BooleanField("Vegetarian?")
-    plus_one_vegetarian = BooleanField("Vegetarian?")
+    vegetarian = BooleanField("Are you vegetarian?")
+    plus_one_vegetarian = BooleanField("Is your plus-one vegetarian?")
     additional_comments = TextAreaField(
         "Additional Comments",
         validators=[length(max=200)],
