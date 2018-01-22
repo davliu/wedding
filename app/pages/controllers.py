@@ -45,17 +45,23 @@ def rsvp_update():
 
     # Populate form fields
     form = RSVPUpdateForm()
-    for k, v in invite.iteritems():
-        try:
-            if not getattr(form, k).data:
-                getattr(form, k).data = v
-        except:
-            pass
+    if request.method == "GET":
+        for k, v in invite.iteritems():
+            try:
+                if not getattr(form, k).data:
+                    getattr(form, k).data = v
+            except:
+                pass
 
     return_invite = copy.copy(invite)
     return_invite.pop("row", None)
-    if request.method == "POST" and form.validate_on_submit() and RSVP.reserve(form, invite):
-        session.pop("invite", None)
-        flash("Thank you for registering!")
-        return redirect(url_for("pages.index"))
+    if request.method == "POST":
+        if invite["invitation_code"] != form.invitation_code.data:
+            flash("Mismatching reservation! Please try to RSVP again.")
+            return redirect(url_for("pages.rsvp"))
+
+        if form.validate_on_submit() and RSVP.reserve(form, invite):
+            session.pop("invite", None)
+            flash("Thank you for registering!")
+            return redirect(url_for("pages.index"))
     return render_template("pages/rsvp_update.html", form=form, invite=return_invite)

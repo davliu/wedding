@@ -8,6 +8,7 @@
 
 <form method="POST" action="{{ url_for("pages.rsvp_update") }}">
   {{ form.hidden_tag() }}
+  {{ form.invitation_code }}
   <div class="form-group form-row">
     {{ form.vegetarian.label(class_="form-check-label col-md-3 offset-md-3") }}
     <div class="col-md-3">
