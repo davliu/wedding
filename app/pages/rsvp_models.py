@@ -6,6 +6,7 @@ import pytz
 from flask import current_app
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from wtforms import BooleanField
 
 RETRIEVE_FIELDS = {
     "person",
@@ -50,6 +51,15 @@ class RSVP(object):
         return {v.replace(" ", "_").lower(): k for k, v in enumerate(wks.row_values(1)) if v}
 
     @staticmethod
+    def populate_invite(form, invite):
+        for k, v in invite.iteritems():
+            try:
+                field = getattr(form, k)
+                field.data = bool(int(v or 0)) if type(field) == BooleanField else v
+            except:
+                pass
+
+    @staticmethod
     def validate_invitation_code(form):
         wks = RSVP.get_wks()
         try:
@@ -76,7 +86,7 @@ class RSVP(object):
 
         # Update cells
         for field, value in form.data.items():
-            if not value or field not in UPDATE_FIELDS:
+            if field not in UPDATE_FIELDS:
                 continue
             save_value = value
             if type(value) == bool:

@@ -46,12 +46,7 @@ def rsvp_update():
     # Populate form fields
     form = RSVPUpdateForm()
     if request.method == "GET":
-        for k, v in invite.iteritems():
-            try:
-                if not getattr(form, k).data:
-                    getattr(form, k).data = v
-            except:
-                pass
+        RSVP.populate_invite(form, invite)
 
     return_invite = copy.copy(invite)
     return_invite.pop("row", None)

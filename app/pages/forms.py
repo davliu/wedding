@@ -40,6 +40,9 @@ class RSVPUpdateForm(FlaskForm):
             if not self.plus_one_name.data:
                 self.plus_one_name.errors.append("What is this person's name?")
                 valid = False
+        else:
+            self.plus_one_name.data = ""
+            self.plus_one_vegetarian.data = False
 
         if not valid:
             return False
