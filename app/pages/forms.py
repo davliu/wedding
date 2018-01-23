@@ -34,6 +34,18 @@ class RSVPUpdateForm(FlaskForm):
         "Additional Comments",
         validators=[length(max=200)],
     )
+    song_suggestion_1 = StringField(
+        "Song Suggestion 1",
+        validators=[length(max=100)], render_kw={"placeholder": "Optional"},
+    )
+    song_suggestion_2 = StringField(
+        "Song Suggestion 2",
+        validators=[length(max=100)], render_kw={"placeholder": "Optional"},
+    )
+    song_suggestion_3 = StringField(
+        "Song Suggestion 3",
+        validators=[length(max=100)], render_kw={"placeholder": "Optional"},
+    )
 
     def validate(self):
         valid = FlaskForm.validate(self)

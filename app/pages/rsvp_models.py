@@ -19,6 +19,9 @@ RETRIEVE_FIELDS = {
     "plus_one_name",
     "plus_one_vegetarian",
     "additional_comments",
+    "song_suggestion_1",
+    "song_suggestion_2",
+    "song_suggestion_3",
 }
 
 UPDATE_FIELDS = {
@@ -28,6 +31,9 @@ UPDATE_FIELDS = {
     "plus_one_name",
     "plus_one_vegetarian",
     "additional_comments",
+    "song_suggestion_1",
+    "song_suggestion_2",
+    "song_suggestion_3",
 }
 
 class RSVP(object):

@@ -57,6 +57,22 @@
       </div>
     </div>
   </div>
+  {% for song_field_errors, song_field in [
+      (form.errors.song_suggestion_1, form.song_suggestion_1),
+      (form.errors.song_suggestion_2, form.song_suggestion_2),
+      (form.errors.song_suggestion_3, form.song_suggestion_3)
+    ]
+  %}
+    <div class="form-group form-row">
+      {{ song_field.label(class_="form-check-label col-md-3 offset-md-3") }}
+      <div class="col-md-3">
+        {{ song_field(class_="form-control is-invalid" if song_field_errors else "form-control") }}
+        <div class="invalid-feedback">
+          {% for e in song_field_errors %}{{ e }}{% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
   <div class="form-row">
     <div class="form-group col-md-12">
       {{ form.recaptcha }}
