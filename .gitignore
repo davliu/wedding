@@ -2,3 +2,4 @@ instance/
 deploy/inventories/web
 deploy/group_vars/*/private.yml
 bower_components/
+app/static/js/dist

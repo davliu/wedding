@@ -8,6 +8,15 @@
 - name: Install virtualenv
   pip: name=virtualenv state=present
 
+- name: Make sure {{ app_root }}/app/static/js/dist exists
+  file: path={{ app_root }}/app/static/js/dist state=directory
+
+- name: Copy dist JS files
+  copy: src={{ item.src }} dest={{ item.dest }}
+  with_items:
+    - { src: "../app/static/js/dist/bloodhound.min.js", dest: "{{ app_root }}/app/static/js/dist/bloodhound.min.js" }
+    - { src: "../app/static/js/dist/typeahead.bundle.min.js", dest: "{{ app_root }}/app/static/js/dist/typeahead.bundle.min.js" }
+
 - name: Install requirements
   pip:
     virtualenv: "{{ virtualenv_dir }}"
