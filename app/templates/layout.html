@@ -15,6 +15,7 @@
       crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|Playfair+Display" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for("static", filename="css/index.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/typeahead.css") }}" type="text/css">
   </head>
   <body>
     {% include "navbar.html" %}
@@ -37,6 +38,8 @@
     src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
     integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
     crossorigin="anonymous"></script>
+  <script src="{{ url_for("static", filename="bower_components/corejs-typeahead/dist/bloodhound.min.js") }}"></script>
+  <script src="{{ url_for("static", filename="bower_components/corejs-typeahead/dist/typeahead.bundle.min.js") }}"></script>
   {% block scripts %}
   {% endblock %}
 </html>

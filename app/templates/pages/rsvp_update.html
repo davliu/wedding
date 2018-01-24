@@ -65,8 +65,8 @@
   %}
     <div class="form-group form-row">
       {{ song_field.label(class_="form-check-label col-md-3 offset-md-3") }}
-      <div class="col-md-3">
-        {{ song_field(class_="form-control is-invalid" if song_field_errors else "form-control") }}
+      <div class="col-md-3 song">
+        {{ song_field(class_="form-control track-field is-invalid" if song_field_errors else "form-control track-field") }}
         <div class="invalid-feedback">
           {% for e in song_field_errors %}{{ e }}{% endfor %}
         </div>

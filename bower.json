@@ -1,0 +1,13 @@
+{
+  "name": "wedding",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "corejs-typeahead": "^1.2.1"
+  }
+}

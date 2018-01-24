@@ -2,6 +2,8 @@
 
 from flask import Flask, url_for, request
 from flask_wtf.csrf import CSRFProtect
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 
 from config import configs
 
@@ -13,6 +15,13 @@ def create_app():
     app.config.from_object(configs["default"])
     app.config.from_pyfile("config.py", silent=True)
     csrf.init_app(app)
+
+    # Init spotipy client
+    spotipy_creds = SpotifyClientCredentials(
+        client_id=app.config["SPOTIPY_CLIENT_ID"],
+        client_secret=app.config["SPOTIPY_CLIENT_SECRET"],
+    )
+    app.spotipy_client = spotipy.Spotify(client_credentials_manager=spotipy_creds)
 
     @app.context_processor
     def inject_nav():

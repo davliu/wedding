@@ -2,7 +2,9 @@
 
 import copy
 
-from flask import Blueprint, render_template, request, flash, redirect, url_for, session
+from flask import (
+    Blueprint, render_template, request, flash, redirect, url_for, session, jsonify, current_app
+)
 
 from app.pages.forms import RSVPForm, RSVPUpdateForm
 from app.pages.rsvp_models import RSVP
@@ -60,3 +62,21 @@ def rsvp_update():
             flash("Thank you for registering!")
             return redirect(url_for("pages.index"))
     return render_template("pages/rsvp_update.html", form=form, invite=return_invite)
+
+@bp.route("/track_search", methods=["GET"])
+def track_search():
+    query = request.args.get("q")
+    if not query:
+        return jsonify(tracks=[])
+
+    if "*" not in query:
+        query = u"{}*".format(query)
+    json_tracks = current_app.spotipy_client.search(q=query, type="track", limit=5)
+    tracks = [
+        u"{} by {}".format(
+            i["name"],
+            u" and ".join([a["name"] for a in i["artists"]]) if len(i["artists"]) <= 2 else
+            u" and ".join([a["name"] for a in i["artists"][:2]] + ["etc."])
+        ) for i in json_tracks["tracks"]["items"]
+    ]
+    return jsonify(tracks=tracks)

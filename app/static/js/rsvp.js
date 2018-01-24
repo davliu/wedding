@@ -21,6 +21,38 @@ $(function() {
     });
   };
 
+  var tracks = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.whitespace,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    remote: {
+      url: "/track_search?q=%QUERY",
+      wildcard: "%QUERY",
+      transform: function(response) {
+        return response.tracks;
+      }
+    }
+  });
+
+  $(".track-field").each(function() {
+    $(this).typeahead({
+      hint: true,
+      highlight: true,
+      minLength: 1
+    }, {
+      name: 'tracks',
+      source: tracks,
+      limit: 5
+    });
+  });
+
+  $("form").on("keyup keypress", function(e) {
+    var keyCode = e.keyCode || e.which;
+    if (keyCode === 13) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
   $("#plus_one").on("change", function() {
     showPlusOne();
   });

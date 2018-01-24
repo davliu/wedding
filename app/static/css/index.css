@@ -7,3 +7,5 @@ body {
 h1, h2 {
   font-family: 'Playfair Display', serif;
 }
+
+.twitter-typeahead, .tt-hint, .tt-input, .tt-menu { width: 100%; }
