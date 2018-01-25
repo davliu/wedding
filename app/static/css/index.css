@@ -9,3 +9,7 @@ h1, h2 {
 }
 
 .twitter-typeahead, .tt-hint, .tt-input, .tt-menu { width: 100%; }
+
+.strikethrough {
+  text-decoration: line-through;
+}

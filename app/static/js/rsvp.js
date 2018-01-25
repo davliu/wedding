@@ -19,6 +19,18 @@ $(function() {
       }
       input.prop("disabled", !isAttending);
     });
+
+    $("label").each(function() {
+      if ($(this).attr("for") == "attending") {
+        return;
+      }
+
+      if (isAttending) {
+        $(this).removeClass("strikethrough");
+      } else {
+        $(this).addClass("strikethrough");
+      }
+    });
   };
 
   var tracks = new Bloodhound({
