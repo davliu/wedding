@@ -26,9 +26,9 @@ $(function() {
       }
 
       if (isAttending) {
-        $(this).removeClass("strikethrough");
+        $(this).removeClass("not-attending-field");
       } else {
-        $(this).addClass("strikethrough");
+        $(this).addClass("not-attending-field");
       }
     });
   };
