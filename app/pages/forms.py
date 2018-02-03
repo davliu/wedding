@@ -10,7 +10,7 @@ class RSVPForm(FlaskForm):
         validators=[
             DataRequired(message="Enter the invitation code included in your invite"),
             Regexp(r"^[A-z0-9]+$", message="No special characters allowed"),
-            length(max=4),
+            length(min=1, max=5),
         ],
         render_kw={"placeholder": "Invitation Code"},
     )
