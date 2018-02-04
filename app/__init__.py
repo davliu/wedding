@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, url_for, request
+from flask import Flask, url_for, request, has_request_context
 from flask_wtf.csrf import CSRFProtect
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -25,6 +25,9 @@ def create_app():
 
     @app.context_processor
     def inject_nav():
+        if not has_request_context():
+            return dict()
+
         nav_items = [
             dict(title="Home", route=url_for("pages.index")),
             dict(title="Our Story", route=url_for("pages.story")),

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+    <style>
+      body {
+        width: 8.5in;
+        margin: 0in .1875in;
+      }
+
+      .label{
+        width: 4in;
+        height: 1.13in;
+        margin-right: 0.2in;
+        float: left;
+        text-align: center;
+        overflow: hidden;
+        font-family: 'PT Serif', serif;
+      }
+
+      .page-break  {
+        clear: left;
+        display:block;
+        page-break-after:always;
+      }
+
+      .page-break-padding {
+        margin-top: 0.03in;
+      }
+
+      .invite-code {
+        font-family: Consolas, monaco, monospace;
+        font-size: 50px;
+      }
+    </style>
+  </head>
+<body>
+  {% for invite in invites %}
+    <div class="label">
+      <p>{{ invite.name }}, your unique invite code is:</p>
+      <span class="invite-code">{{ invite.code }}</span>
+    </div>
+    {% if loop.index != 1 and loop.index % 20 == 0 %}
+      <div class="page-break"></div>
+      <div class="page-break-padding"></div>
+    {% endif %}
+  {% endfor %}
+</body>
+</html>
