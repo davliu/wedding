@@ -3,11 +3,38 @@
 {% block body %}
 <h1 class="text-center">Event Info</h1>
 
-<div><b>Where: </b><a href="http://doubletree3.hilton.com/en/hotels/california/doubletree-by-hilton-hotel-los-angeles-downtown-LAXDTDT/index.html" target="_blank">DoubleTree in Downtown Los Angeles</a></div>
-<div><b>Address: </b>120 S Los Angeles St, Los Angeles, CA 90012</div>
-<div><b>Date: </b>July 28, 2018</div>
-<div><b>Time: </b>Ceremony starts promptly at 5:00 PM PDT. Reception starts at 7:00 PM PDT.</div>
+<div class="form-row">
+  <div class="col-6 col-md-6 offset-md-3">
+    <h5>Where</h5>
+    <a href="http://doubletree3.hilton.com/en/hotels/california/doubletree-by-hilton-hotel-los-angeles-downtown-LAXDTDT/index.html" target="_blank">DoubleTree in Downtown Los Angeles</a>
+    <h5>Address</h5>
+    120 S Los Angeles St, Los Angeles, CA 90012
+    <h5>Date</h5>
+    July 28, 2018
+    <h5>Time</h5>
+    Ceremony starts promptly at 5:00 PM PDT. Reception starts at 7:00 PM PDT.
+    <h5>Menu</h5>
+    A 10 course Chinese meal in the following order:
+    <ul>
+      <li>Sucking pig</li>
+    </ul>
+    <h5>Things to do in LA</h5>
+    Anything you want, but if you want to have an awesome day, do this:
+    <ul>
+      <li>Wake up and get to <a href="https://www.yelp.com/biz/savoy-kitchen-alhambra" target="_blank">Savoy</a> by 11am. Order a hainan chicken rice (regular) and a lemon ice tea. If you feel extra hungry, order shrimp rolls.</li>
+      <li>Go to <a href="https://www.yelp.com/biz/fosselmans-ice-cream-alhambra" target="_blank">Fosselman's</a>. Get a single scoop of taro ice cream. Try to not get any other flavors. Sugar cone is fine.</li>
+      <li>Drive to <a href="https://www.yelp.com/biz/the-broad-los-angeles-4" target="_blank">The Broad</a>. Walk around, chill, and take some pictures. Be sure to take a picture with the Michael Jackson statue.</li>
+      <li>Drive to Santa Monica and park at the <a href="https://www.yelp.com/biz/santa-monica-public-library-main-branch-santa-monica" target="_blank">library</a> because it has cheaper rates.</li>
+      <li>Walk to Wilshire and then walk towards the beach. When you reach 3rd street, walk down and explore it until you reach the mall. Most performers are pretty cool, but this <a href="https://youtu.be/D7WzDle-sw4?t=81" target="_blank">guy</a> will blow your mind.</li>
+      <li>Once you reach the mall, go towards the pier. Open your Pokemon Go app and play with some of the last remaining players in SoCal. Ride the ferris wheel. If you're traveling with somebody, hold their hand and share a romantic kiss.</li>
+      <li>Drive to Sawtelle and park in the <a href="https://www.yelp.com/biz/petsmart-los-angeles-3" target="_blank">Petsmart</a> plaza for free.</li>
+      <li>Walk to <a href="https://www.yelp.com/biz/tsujita-la-artisan-noodle-los-angeles-2" target="_blank">Tsujita LA</a>. Don't mistakenly go to Tsujita Annex or Killer Noodle. Get the Cha Siu Tsukemen and follow the eating instructions on their menu STEP BY STEP. Savor the egg.</li>
+      <li>Walk to <a href="https://www.yelp.com/biz/b-sweet-los-angeles-6" target="_blank">B Sweet</a>. Get a small order of bread pudding with ice cream.</li>
+      <li>Go home and relax.</li>
+    </ul>
+  </div>
+</div>
 <div class="text-center">
-  <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=500x500&key={{ config["GOOGLE_BROWSER_KEY"] }}&markers=color:blue|120%20S%20Los%20Angeles%20St,%20Los%20Angeles,%20CA%2090012&zoom=10">
+  <img class="img-fluid" src="https://maps.googleapis.com/maps/api/staticmap?size=550x500&key={{ config["GOOGLE_BROWSER_KEY"] }}&markers=color:blue|120%20S%20Los%20Angeles%20St,%20Los%20Angeles,%20CA%2090012&zoom=10">
 </div>
 {% endblock %}
