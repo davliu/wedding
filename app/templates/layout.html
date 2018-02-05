@@ -14,7 +14,7 @@
       integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy"
       crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond|Playfair+Display" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for("static", filename="css/index.css") }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for("static", filename="css/index.css", v=config.GIT_REV_HASH) }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for("static", filename="css/typeahead.css") }}" type="text/css">
   </head>
   <body>

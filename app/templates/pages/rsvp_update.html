@@ -87,5 +87,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for("static", filename="js/rsvp.js") }}"></script>
+<script src="{{ url_for("static", filename="js/rsvp.js", v=config.GIT_REV_HASH) }}"></script>
 {% endblock %}
