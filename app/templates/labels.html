@@ -37,10 +37,21 @@
   </head>
 <body>
   {% for invite in invites %}
-    <div class="label">
-      <p>{{ invite.name }}, your unique invite code is:</p>
-      <span class="invite-code">{{ invite.code }}</span>
-    </div>
+    {% if use_addresses %}
+      <div class="label">
+        <p>
+          {{ invite.name }}<br>
+          {% for address_part in invite.address %}
+            {{ address_part }}{% if not loop.last %}<br>{% endif %}
+          {% endfor %}
+        </p>
+      </div>
+    {% else %}
+      <div class="label">
+        <p>{{ invite.name }}, your unique invite code is:</p>
+        <span class="invite-code">{{ invite.code }}</span>
+      </div>
+    {% endif %}
     {% if loop.index != 1 and loop.index % 20 == 0 %}
       <div class="page-break"></div>
       <div class="page-break-padding"></div>
