@@ -36,6 +36,14 @@ UPDATE_FIELDS = {
     "song_suggestion_3",
 }
 
+TEXT_FIELDS = {
+    "plus_one_name",
+    "additional_comments",
+    "song_suggestion_1",
+    "song_suggestion_2",
+    "song_suggestion_3",
+}
+
 class RSVP(object):
     @staticmethod
     def get_wks():
@@ -99,6 +107,9 @@ class RSVP(object):
             save_value = value
             if type(value) == bool:
                 save_value = 1 if value else 0
+            if field in TEXT_FIELDS:
+                if save_value and save_value != "'":
+                    save_value = u"'{}".format(save_value)
             wks.update_cell(invite["row"], headers[field] + 1, save_value)
 
         time_now = pytz.utc.localize(
