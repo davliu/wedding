@@ -48,7 +48,9 @@
       </div>
     {% else %}
       <div class="label">
-        <p>{{ invite.name }}, your unique invite code is:</p>
+        {% if invite.name %}
+          <p>{{ invite.name }}, your unique invite code is:</p>
+        {% endif %}
         <span class="invite-code">{{ invite.code }}</span>
       </div>
     {% endif %}
