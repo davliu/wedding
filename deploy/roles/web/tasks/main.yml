@@ -11,6 +11,7 @@
     - supervisor
     - libpcre3
     - libpcre3-dev
+    - htop
 
 - import_tasks: repo.yml
 - import_tasks: encrypt.yml
