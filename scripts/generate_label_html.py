@@ -16,7 +16,7 @@ def format_address(address):
     comma_index = address.index(",")
     return [address[:comma_index], address[comma_index + 1:].strip()]
 
-def generate_html(offset=None, use_addresses=None, blanks=None):
+def generate_html(offset=None, use_addresses=None, blanks=None, limit=None):
     offset = offset or 0
     blanks = blanks or 0
 
@@ -25,6 +25,8 @@ def generate_html(offset=None, use_addresses=None, blanks=None):
         wks = RSVP.get_wks()
         headers = RSVP.get_headers(wks)
         names = wks.col_values(headers["person"] + 1)[offset:]
+        if limit:
+            names = names[:limit]
         if not use_addresses:
             invitation_codes = wks.col_values(headers["invitation_code"] + 1)[offset:]
             invites = [
@@ -48,12 +50,14 @@ def generate_html(offset=None, use_addresses=None, blanks=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-o", "--offset", help="Offset")
+    parser.add_argument("-l", "--limit", help="Limit")
     parser.add_argument("-a", "--addresses", help="Generate address labels") # Invite codes defaulted
     parser.add_argument("-b", "--blanks", help="Initial blanks") # When printing partial sheets
 
     args = parser.parse_args()
     generate_html(
         offset=int(args.offset or 0),
+        limit=int(args.limit or 0),
         use_addresses=bool(args.addresses),
         blanks=int(args.blanks or 0),
     )
