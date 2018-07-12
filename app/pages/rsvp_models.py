@@ -46,7 +46,7 @@ TEXT_FIELDS = {
 
 class RSVP(object):
     @staticmethod
-    def get_wks():
+    def get_wks(sheet_tab_name=None):
         scope = ['https://spreadsheets.google.com/feeds']
 
         with current_app.open_instance_resource('service-credentials.json') as f:
@@ -57,7 +57,7 @@ class RSVP(object):
             return (
                 gc.
                 open(current_app.config["SPREADSHEET_NAME"]).
-                worksheet(current_app.config["SHEET_TAB_NAME"])
+                worksheet(sheet_tab_name or current_app.config["SHEET_TAB_NAME"])
             )
         except:
             return
