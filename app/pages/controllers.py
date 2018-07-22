@@ -25,6 +25,11 @@ def event():
 
 @bp.route("/rsvp", methods=["GET", "POST"])
 def rsvp():
+    flash(
+        "The RSVP period is over! "
+        "Please contact us at davidjanetliu@gmail.com for any questions.")
+    return redirect(url_for("pages.rsvp_update"))
+
     session.pop("invite", None)
     form = RSVPForm()
     if request.method == "POST":
