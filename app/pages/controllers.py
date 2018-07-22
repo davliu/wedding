@@ -28,7 +28,7 @@ def rsvp():
     flash(
         "The RSVP period is over! "
         "Please contact us at davidjanetliu@gmail.com for any questions.")
-    return redirect(url_for("pages.rsvp_update"))
+    return redirect(url_for("pages.index"))
 
     session.pop("invite", None)
     form = RSVPForm()
