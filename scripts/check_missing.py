@@ -19,18 +19,19 @@ def get_people():
         rsvpd_names = set(names) | set(plus_one_names)
 
         # Get seating chart names
-        seating_names = set()
         seating_sheet = RSVP.get_wks(sheet_tab_name="Seating")
         i = 1
+        table_names = []
         while True:
-            names = [
-                n.lower() for n in seating_sheet.col_values(i)[1:]
+            new_names = [
+                (i, n) for n in seating_sheet.col_values(i)[1:]
                 if n and not n.isdigit() and n != "Total Guest Count"]
             i += 1
-            if not names:
+            if not new_names:
                 break
-            seating_names |= set(names)
+            table_names.extend(new_names)
 
+        seating_names = {n[1].lower() for n in table_names}
         # missing_names = seating_names ^ rsvpd_names
         # print "Missing Names:"
         # print json.dumps(list(missing_names), indent=4)
@@ -38,6 +39,19 @@ def get_people():
         print json.dumps(list(rsvpd_names - seating_names), indent=4)
         print "In Seating Chart, but not Guest List:"
         print json.dumps(list(seating_names - rsvpd_names), indent=4)
+
+        print "Attending:"
+        formatted_names = []
+        for table_name in table_names:
+            table_name_split = table_name[1].replace("(Veg)", "").strip().split(" ")
+            formatted_names.append((
+                table_name[0],
+                u"{}, {}".format(table_name_split[-1], " ".join(table_name_split[:-1]))))
+        formatted_names = sorted(formatted_names, key=lambda e: e[1])
+        for formatted_name in formatted_names:
+            print formatted_name[0]
+        for formatted_name in formatted_names:
+            print formatted_name[1]
 
 
 if __name__ == "__main__":
